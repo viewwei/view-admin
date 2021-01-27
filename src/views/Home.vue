@@ -13,6 +13,10 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted(){
+      // this.$store.dispatch('errorLog/clearErrorLog')
+    console.log("view:",this.$store.state.test)
   }
 }
 </script>
