@@ -1,5 +1,6 @@
 const state = {
-    isLogin :true
+    isLogin :true,
+    value:"ddddddd"
 }
 const mutations = {}
 const actions = {

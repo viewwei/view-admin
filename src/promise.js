@@ -5,17 +5,24 @@ const whiteRoutes =  routes.reduce((target,value)=>{
     target.push(value.path)
     return target
 },[])
-console.log("path:",whiteRoutes)
+let isLoading = false
 router.beforeEach(async(to,from,next) =>{
     const isLogin = await store.dispatch('user/isLogin')
-    next()
     if (isLogin){
-        // 去判断权限
-        const roles =await store.dispatch('test/getRoles')
-        const accessRouters = await store.dispatch('test/getRouter',roles)
         debugger
+        // 去判断权限
+        if(!isLoading ){
+            const roles =await store.dispatch('test/getRoles')
+            const accessRouters = await store.dispatch('test/getRouter',roles)
+            isLoading = true 
+            router.addRoutes(accessRouters)
+            next({...to,replace:true})
+
+        }else{
+            next()
+        }
     }else{
-       if (routes.includes(to.path) !=-1) {
+       if (whiteRoutes.includes(to.path) !=-1) {
         // 代表可以不用登录就可以访问的
         next()
        }else{

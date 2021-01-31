@@ -59,6 +59,7 @@ module.exports = {
         config.optimization.splitChunks({
           chunks:"all",
           cacheGroups: {
+            // 单独打包库文件
             libs: {
               name: 'chunk-libs',
               test: /[\\/]node_modules[\\/]/,
@@ -66,11 +67,13 @@ module.exports = {
               chunks: 'initial' // only package third parties that are initially dependent
             },
             elementUI: {
+              // 单独打包饿了么框架
               name: 'chunk-elementUI', // split elementUI into a single package
               priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
               test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
             },
             commons: {
+              // 打包项目文件
               name: 'chunks-commons',
               test: resolve('src/components'), // can customize your rules
               minChunks: 3, //  minimum common number
@@ -79,7 +82,7 @@ module.exports = {
             }
           }
         })
-          config.optimization.runtimeChunk('single')
+          config.optimization.runtimeChunk('single') //单独打包 runtime
     })
   }
 }
