@@ -9,7 +9,6 @@ let isLoading = false
 router.beforeEach(async(to,from,next) =>{
     const isLogin = await store.dispatch('user/isLogin')
     if (isLogin){
-        debugger
         // 去判断权限
         if(!isLoading ){
             const roles =await store.dispatch('test/getRoles')

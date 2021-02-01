@@ -22,7 +22,11 @@
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
     <h3>Ecosystem</h3>
-     <h1>{{$t('music')}}</h1>
+     <span class="web-font">领导力量的物理断路器无劳动力群领导力量的物理断路器无劳动力群领导力量的物理断路器无劳动力群</span>
+     <br />
+     <span class="web-font">结婚就是给自由穿件棉衣，活动起来不方便，但会很温暖</span>
+     <br />
+     <span class="test">{{$t('music')}}</span>
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
@@ -30,6 +34,7 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <el-button type="primary">默认按钮</el-button>
   </div>
 </template>
 
@@ -49,6 +54,20 @@ export default {
 }
 </script>
 <style scoped>
+.web-font {
+    font-family: "webfont" !important;
+    font-size: 25px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.test {
+     /* font-family: "webfont" !important; */
+    font-size: 25px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 h3 {
   margin: 40px 0 0;
 }
