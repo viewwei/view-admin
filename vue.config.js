@@ -29,6 +29,23 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+    // 配置 scss 变量共享
     const oneOfsMap = config.module.rule('scss').oneOfs.store
         oneOfsMap.forEach(item => {
           item

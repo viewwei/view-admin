@@ -7,7 +7,9 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import './styles/element-variables.scss'
 import './styles/index.scss'
-
+import "./icons/index"
+import LoadPlugin from "./plugin/loadPlugin"
+Vue.use(LoadPlugin)
 Vue.use(Element, {
   size:  'medium', // set element-ui default size
 })
