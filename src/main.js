@@ -6,6 +6,8 @@ import i18n from "./lang/index"
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import './styles/element-variables.scss'
+import './styles/index.scss'
+
 Vue.use(Element, {
   size:  'medium', // set element-ui default size
 })

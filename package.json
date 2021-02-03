@@ -10,8 +10,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
+    "less-loader": "^5.0.0",
     "sass": "^1.32.5",
-    "sass-loader": "^10.1.1",
     "scss": "^0.2.4",
     "scss-loader": "0.0.1",
     "vue": "^2.6.11",
@@ -35,6 +35,9 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "html-webpack-plugin": "^4.5.1",
+    "less": "^4.1.1",
+    "sass-loader": "^7.3.1",
+    "sass-resources-loader": "^2.1.1",
     "script-ext-html-webpack-plugin": "^2.1.5",
     "vue-i18n": "^8.22.4",
     "vue-template-compiler": "^2.6.11"

@@ -17,6 +17,9 @@ module.exports = {
       warn: false
     }
   },
+  css: {
+    
+  },
   configureWebpack: {
     name: "view_ui",
     resolve: {
@@ -26,6 +29,17 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+    const oneOfsMap = config.module.rule('scss').oneOfs.store
+        oneOfsMap.forEach(item => {
+          item
+            .use('sass-resources-loader')
+            .loader('sass-resources-loader')
+            .options({
+              // 全局变量文件路径，只有一个时可将数组省去
+              resources: ['./src/styles/variables.scss']
+            })
+            .end()
+        })
     // 路由预加载
     config.plugin("preload")
       .tap(() => [

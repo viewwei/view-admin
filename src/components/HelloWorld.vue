@@ -54,13 +54,13 @@ export default {
 }
 </script>
 <style scoped>
-.web-font {
+/* .web-font {
     font-family: "webfont" !important;
     font-size: 25px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+} */
 .test {
      /* font-family: "webfont" !important; */
     font-size: 25px;
