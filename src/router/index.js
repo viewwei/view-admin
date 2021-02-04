@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import RouterConst from "@/const/router.js"
 /**
  * 切记：webpackChunkName 最好不要删除，这个是按需加载的名称
- * 
  * */ 
 const Login = () =>import(/* webpackChunkName: "Login" */ '@/views/login/Index.vue')
 const Test1 = () => import(/* webpackChunkName: "test1" */ '@/components/test/index1.vue')
@@ -13,19 +12,26 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'home',
+    component:Test1,
+    children:[
+      {
+        path:"/a",
+        name:"a",
+        component:Test2
+      },
+      {
+        path:"/b",
+        name:"b",
+        component:Test3
+      },
+    ]
+  },
+  {
+    path: '/login',
     name: 'login',
     component: Login
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "aboutc" */ '../views/About.vue')
-  },
-  {
-    path:'/login',
-    name:RouterConst.Login,
-    component:Login
-  }
 ]
 
 const asyncRoutes = [
