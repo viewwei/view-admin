@@ -8,7 +8,7 @@ module.exports = {
   publicPath: "./",
   outputDir: "build",
   assetsDir: "resource",
-  productionSourceMap: process.env.NODE_ENV == "development",
+  productionSourceMap: true,
   devServer: {
     port: port,
     open: true,

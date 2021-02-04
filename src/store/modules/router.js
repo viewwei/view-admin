@@ -1,22 +1,28 @@
-import { asyncRoutes } from "@/router/index.js"
+import { asyncRoutes,routes} from "@/router/index.js"
 const state = {
-    roles: ["2"],
-    copyRouter: asyncRoutes,// 保留一份完成的路由信息图
+    systemRouters: [],// 后面保存的是系统所有的路由信息
 }
-const mutations = {}
+const mutations = {
+    SAVE_ROUTER:function(state,accessedRoutes){
+        state.systemRouters = state.systemRouters.concat(...accessedRoutes,routes)
+        debugger
+    }
+}
 const actions = {
-    getRoles({ commit, state }) {
+    getRoles({state }) {
         return state.roles
     },
-    getRouter({ }, roles) {
-        
+    getRouter({commit}, roles) {
         return new Promise(resolve => {
             let accessedRoutes = []
             if (roles.includes("1")) {
                 // 拥有超级权限,拥有所以的路由
                 accessedRoutes = asyncRoutes || []
+                commit("SAVE_ROUTER",accessedRoutes)
             } else {
                 accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+                // 发送一份路由到state,用来保存
+                commit("SAVE_ROUTER",accessedRoutes)
             }
             resolve(accessedRoutes)
         })
@@ -24,7 +30,6 @@ const actions = {
 }
 // 过滤需要的路由
 function filterAsyncRoutes(routes, roles) {
-    
     let res = []
     const copyRoutes = routes.slice(0, routes.length)
     copyRoutes.forEach(route => {

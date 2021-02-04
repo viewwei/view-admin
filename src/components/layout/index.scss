@@ -1,0 +1,28 @@
+// @import './variables.scss';
+.v-layout {
+    width: 100%;
+    height: 100%;
+    background-color: #EFF1F4;
+    display: flex;
+    flex-direction: row;
+    .v-slider {
+        width: 220px;
+        height: 100%;
+        background-color: $menuBg;
+    }
+    .v-slider-with {
+        transition: width 0.10s;
+        width: 64px !important;
+        overflow: hidden;
+    }
+    .v-main {
+        height: 100%;
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
+.el-menu-vertical:not(.el-menu--collapse) {
+    width: 200px;
+}

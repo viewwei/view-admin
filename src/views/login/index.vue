@@ -18,7 +18,9 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary" class="v-login-btn" @click="loginClick">Login</el-button>
+      <el-button type="primary" class="v-login-btn" @click="loginClick"
+        >Login</el-button
+      >
     </div>
   </div>
 </template>
@@ -32,13 +34,33 @@ export default {
       },
     };
   },
-  mounted(){
-  
+  mounted() {},
+  methods: {
+    loginClick() {
+      debugger
+      this.$load.loading();
+        this.$store
+          .dispatch("login/login", {
+            username: this.loginForm.usename,
+            password: this.loginForm.password,
+          })
+          .then(() => {
+            this.$load.closeLoading();
+            debugger
+             let redirect = this.$route.query.redirect;
+        if (redirect) {
+          this.$router.replace(redirect);
+        } else {
+          this.$router.replace("/");
+        }
+          })
+          .catch(() => {
+            this.$load.closeLoading();
+          });
+
+       
+    },
   },
-  methods:{
-    loginClick(){
-    }
-  }
 };
 </script>
 <style   lang="scss" scoped>
@@ -51,7 +73,6 @@ export default {
   justify-content: center;
   .v-main {
     width: 520px;
-    // height: 200px;
     padding: 50px;
     .v-login-title {
       text-align: center;
@@ -68,7 +89,7 @@ export default {
       width: 30px;
       display: inline-block;
     }
-    .v-login-btn{
+    .v-login-btn {
       width: 100%;
     }
   }
