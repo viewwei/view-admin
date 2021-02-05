@@ -10,6 +10,7 @@
         }
       }
     }
+    
   }
   .el-menu {
       .el-submenu {
@@ -32,4 +33,7 @@
   }
   .el-submenu,.el-menu-item {
       width: 220px;
+  }
+  .el-menu-item.is-active .svgIcon {
+    color:#1890ff !important;
   }

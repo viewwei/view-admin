@@ -37,7 +37,6 @@ export default {
   mounted() {},
   methods: {
     loginClick() {
-      debugger
       this.$load.loading();
         this.$store
           .dispatch("login/login", {
@@ -46,7 +45,6 @@ export default {
           })
           .then(() => {
             this.$load.closeLoading();
-            debugger
              let redirect = this.$route.query.redirect;
         if (redirect) {
           this.$router.replace(redirect);

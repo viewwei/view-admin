@@ -1,11 +1,14 @@
 const state = {
-    isOpen:false
+    isOpen:false,
+    isCollapse:false,
 }
 const mutations = {
     OPEN:function(state){
+        state.isCollapse = true
         state.isOpen = true
     } ,
     CLOSE:function(state){
+        state.isCollapse = false
         state.isOpen = false
     }
 }

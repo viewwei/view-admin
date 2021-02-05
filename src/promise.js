@@ -1,5 +1,4 @@
 import router from "./router/index"
-import constRouter from "@/const/router.js"
 import store from "./store/index"
 import {isLogin} from "@/utils/user"
 const whiteRoutes =["/login"]
@@ -13,6 +12,8 @@ router.beforeEach(async (to, from, next) => {
         }else{
             if (store.state.router.systemRouters.length >0){
                 // 代表已经添加动态路由
+                
+                await store.dispatch("router/setCurrentRouter",to.path)
                 next()
             }else{
                 const roles =await store.dispatch('login/getRoles') 

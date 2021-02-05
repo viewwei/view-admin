@@ -15,7 +15,6 @@ const mutations = {
 }
 const actions = {
     login({ commit }, userInfo) {
-        debugger
         const { username, password } = userInfo
         // 返回一个状态
         return new Promise((resolve, reject) => {

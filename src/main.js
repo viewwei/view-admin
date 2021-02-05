@@ -9,7 +9,9 @@ import './styles/element-variables.scss'
 import './styles/index.scss'
 import "./icons/index"
 import LoadPlugin from "./plugin/loadPlugin"
+import Table from "@/components/common/table/table.vue"
 Vue.use(LoadPlugin)
+Vue.component('sn-table', Table)
 Vue.use(Element, {
   size:  'medium', // set element-ui default size
 })
