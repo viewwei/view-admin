@@ -7,7 +7,6 @@ router.beforeEach(async (to, from, next) => {
     let loginResult = isLogin()
     
     if (loginResult){
-        debugger
         // 代表已经登录
         if (to.path === "/login"){
             // 如果是登录界面直接跳转到首页
@@ -18,7 +17,6 @@ router.beforeEach(async (to, from, next) => {
                 // 代表已经添加动态路由
                 next()
             }else{
-                debugger
                 const roles =await store.dispatch('login/getRoles') 
                 const accessRouters = await store.dispatch('router/getRouter',roles)
                 router.addRoutes(accessRouters)
@@ -27,7 +25,6 @@ router.beforeEach(async (to, from, next) => {
             // 需要动态路由
         }
     }else {
-        debugger
         // 处理尚未登录的情况
         // 判断当前路由是否是白名单路由，如果是白名单，则直接登录
         let isExist = whiteRoutes.includes(to.path)
