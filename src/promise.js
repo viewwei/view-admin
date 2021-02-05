@@ -23,7 +23,6 @@ router.beforeEach(async (to, from, next) => {
             // 需要动态路由
         }
     }else {
-        debugger
         // 处理尚未登录的情况
         // 判断当前路由是否是白名单路由，如果是白名单，则直接登录
         let isExist = whiteRoutes.includes(to.path)

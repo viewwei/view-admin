@@ -5,7 +5,6 @@ const state = {
 const mutations = {
     SAVE_ROUTER:function(state,accessedRoutes){
         state.systemRouters = state.systemRouters.concat(...accessedRoutes,routes)
-        debugger
     }
 }
 const actions = {
