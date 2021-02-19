@@ -18,7 +18,8 @@ LoadPlugin.install = (Vue) => {
                 _loadingInstance = Loading.service(option);
             }
             closeLoading() {
-                _loadingInstance.close();
+               
+                _loadingInstance&& _loadingInstance.close();
             }
         }
         return iLoad

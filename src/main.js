@@ -13,7 +13,7 @@ import Table from "@/components/common/table/table.vue"
 Vue.use(LoadPlugin)
 Vue.component('sn-table', Table)
 Vue.use(Element, {
-  size:  'medium', // set element-ui default size
+  size:  'mini', // set element-ui default size
 })
 // import a from "./font/global.css"
 import './font/global.css'
