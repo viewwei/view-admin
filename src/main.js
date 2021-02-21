@@ -10,12 +10,14 @@ import './styles/index.scss'
 import "./icons/index"
 import LoadPlugin from "./plugin/loadPlugin"
 import Table from "@/components/common/table/table.vue"
+import TableTool from "@/components/common/tabletool/index.vue"
 Vue.use(LoadPlugin)
 Vue.component('sn-table', Table)
+Vue.component('sn-table-tool', TableTool)
+Vue.prototype.$bus = new Vue();
 Vue.use(Element, {
   size:  'mini', // set element-ui default size
 })
-// import a from "./font/global.css"
 import './font/global.css'
 Vue.config.productionTip = false
 import "./promise"

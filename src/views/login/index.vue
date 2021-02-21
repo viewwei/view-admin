@@ -61,6 +61,13 @@ export default {
   },
 };
 </script>
+<style  scoped>
+.v-main >>> .el-input__inner
+{
+   padding-left: 40px  !important;
+   padding: 25px 0px;
+}
+</style>
 <style   lang="scss" scoped>
 .v-login-main {
   width: 100%;
