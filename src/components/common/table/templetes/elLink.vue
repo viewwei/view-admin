@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+    inheritAttrs: false,
   methods: {
     linkClick() { 
     this.scope.event &&this.$emit(this.scope.event, this.row, this.scope);

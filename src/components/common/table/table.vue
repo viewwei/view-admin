@@ -11,16 +11,16 @@
       ref="commonTable"
       size="mini"
     >
-       <el-table-column
-      type="selection"
-      width="55"
-      v-if="tableStyle.params.select"
+      <el-table-column
+        type="selection"
+        width="55"
+        v-if="tableStyle.params.select"
       >
-    </el-table-column>
+      </el-table-column>
       <el-table-column
         type="index"
         fixed="left"
-        v-if="tableStyle.params.index&&tableStyle.params.index.show"
+        v-if="tableStyle.params.index && tableStyle.params.index.show"
         :index="tableStyle.params.index.indexMethod"
         :label="tableStyle.params.index.label"
         width="50"
@@ -95,12 +95,12 @@
           v-if="filedItem.readType == TableConst.NORMAL || !filedItem.readType"
           :key="index"
           :label="filedItem.label"
-           :min-width="filedItem.minWidth"
-             :show-overflow-tooltip="true"
+          :min-width="filedItem.minWidth"
+          :show-overflow-tooltip="true"
         >
           <template slot-scope="scope">
-             {{ scope.row[filed] }}
-             </template>
+            {{ scope.row[filed] }}
+          </template>
         </el-table-column>
         <!-- 代表通过函数读取，返回当前行数和这一行的数据 -->
         <el-table-column
@@ -111,10 +111,12 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="scope">
-           {{ filedItem.readFunc(scope.row, scope.$index,getTableSourceData) }}  </template
-          >
+            {{
+              filedItem.readFunc(scope.row, scope.$index, getTableSourceData)
+            }}
+          </template>
         </el-table-column>
-       <!-- 代表超级链接 -->
+        <!-- 代表超级链接 -->
         <el-table-column
           v-if="filedItem.readType == TableConst.LINK"
           :key="index"
@@ -122,23 +124,74 @@
           :min-width="filedItem.minWidth"
           :show-overflow-tooltip="true"
         >
-        <template slot-scope="{row,$index}">
-           <sn-link v-on="$listeners" :row="row" :scope="filedItem" :field="filed" :sourceData="getTableSourceData" :index="$index" />
-        </template>
+          <template slot-scope="{ row, $index }">
+            <sn-link
+              v-on="$listeners"
+              :row="row"
+              :scope="filedItem"
+              :field="filed"
+              :sourceData="getTableSourceData"
+              :index="$index"
+            />
+          </template>
         </el-table-column>
-          <!-- 代表tag布局 -->
+        <!-- 代表tag布局 -->
         <el-table-column
           v-if="filedItem.readType == TableConst.TAG"
           :key="index"
           :label="filedItem.label"
-          :min-width="filedItem.minWidth"
+          :min-width="filedItem.minWidth ? filedItem.minWidth : '100'"
+          align="center"
         >
-        <template slot-scope="{row,$index}">
-           <sn-tag :row="row" :scope="filedItem" :field="filed"
-           :sourceData="getTableSourceData" :index="$index"
-           v-on="$listeners"
-           />
-        </template>
+          <template slot-scope="{ row, $index }">
+            <sn-tag
+              :row="row"
+              :scope="filedItem"
+              :field="filed"
+              :sourceData="getTableSourceData"
+              :index="$index"
+              v-on="$listeners"
+            />
+          </template>
+        </el-table-column>
+        <!-- 代表修改 -->
+        <el-table-column
+          v-if="filedItem.readType == TableConst.MODIFY"
+          :key="index"
+          :label="filedItem.label"
+          :min-width="filedItem.minWidth ? filedItem.minWidth : '170'"
+          :show-overflow-tooltip="true"
+        >
+          <template slot-scope="{ row, $index }">
+            <sn-modify
+              :row="row"
+              :scope="filedItem"
+              :field="filed"
+              :sourceData="getTableSourceData"
+              :index="$index"
+              v-on="$listeners"
+            ></sn-modify>
+          </template>
+        </el-table-column>
+        <!-- 代表switch 按钮 -->
+        <el-table-column
+          v-if="filedItem.readType == TableConst.SWITCH"
+          :key="index"
+          :label="filedItem.label"
+          :min-width="filedItem.minWidth ? filedItem.minWidth : '100'"
+          :show-overflow-tooltip="true"
+          align="center"
+        >
+          <template slot-scope="{ row, $index }">
+            <sn-switch
+              :row="row"
+              :scope="filedItem"
+              :field="filed"
+              :sourceData="getTableSourceData"
+              :index="$index"
+              v-on="$listeners"
+            ></sn-switch>
+          </template>
         </el-table-column>
       </template>
     </el-table>
@@ -161,13 +214,17 @@
 </template>
 <script>
 import { TableNomalConst, TableConst } from "@/const/table.js";
-import elLink from "./templetes/elLink"
-import snTag from "./templetes/tableTag"
+import elLink from "./templetes/elLink";
+import snTag from "./templetes/tableTag";
+import snModify from "./templetes/tableModify";
+import snSwitch from "./templetes/tableSwitch";
 export default {
   inheritAttrs: false,
-  components:{
-    "sn-link":elLink,
-    "sn-tag":snTag
+  components: {
+    "sn-link": elLink, //超级链接栏目
+    "sn-tag": snTag, //标签栏目
+    "sn-modify": snModify, //修改栏目
+    "sn-switch": snSwitch, //开关按钮
   },
   props: {
     // 表格样式
@@ -211,18 +268,18 @@ export default {
     },
   },
   methods: {
-    headerDragend(){
-      this.doLayout()
+    headerDragend() {
+      this.doLayout();
     },
     // scope 代表表格的作用域插槽数据 item代表表格配置项数据中的operations遍历数据
     tableOperationEvent(scope, item) {
       item.event && this.$emit(item.event, scope.row);
     },
-    selectAll(section){
-     this.$emit('selectAll',section)
+    selectAll(section) {
+      this.$emit("selectAll", section);
     },
-    selectionChange(section){
-      this.$emit('selectAll',section)
+    selectionChange(section) {
+      this.$emit("selectAll", section);
     },
     // 改变页面条目
     handleSizeChange(val) {
@@ -326,9 +383,9 @@ export default {
   padding: 10px 0px;
   background-color: #fff;
 }
-.text-show {
-    // white-space: nowrap;
-    // text-overflow: ellipsis;
-    // overflow: hidden;
-}
+// .text-show {
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
+  // overflow: hidden;
+// }
 </style>

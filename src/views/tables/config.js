@@ -1,8 +1,8 @@
 import {TableConst} from "@/const/table.js"
 import TableTag from "@/class/tableTag.js"
+import TableSwitch from "@/class/tableSwitch"
 const config = {
   title:"table表格",//table数据标题
-  ref:"table",//表格的ref
   tool:[
     {
       label:"导出表格", //操作栏的名称
@@ -101,12 +101,13 @@ const config = {
       }
     },
     deviceIp54:{
-      label:"设备Ip",
+      label:"设备Ipcccc",
       show:true,//设备Ip需要打开
       hide:true,//设备Ip需要展示
-      readType:TableConst.FUNCTION,//函数式读取
+      readType:TableConst.SWITCH,//函数式读取
+      event:"switchEvent",
       readFunc:function(row,scope,index,sourceData){
-        return "dddd"
+        return new TableSwitch(true)
       }
     },
     deviceIp44:{
@@ -119,10 +120,11 @@ const config = {
       }
     },
     deviceIp34:{
-      label:"设备Ip",
+      label:"VVVVV",
       show:true,//设备Ip需要打开
       hide:true,//设备Ip需要展示
-      readType:TableConst.FUNCTION,//函数式读取
+      readType:TableConst.MODIFY,//修改
+      event:"modifyEvent",
       readFunc:function(row,scope,index,sourceData){
         return "dddd"
       }
@@ -148,5 +150,4 @@ const config = {
     }
   }
 }
-
 export default config

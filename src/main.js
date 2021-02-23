@@ -11,7 +11,10 @@ import "./icons/index"
 import LoadPlugin from "./plugin/loadPlugin"
 import Table from "@/components/common/table/table.vue"
 import TableTool from "@/components/common/tabletool/index.vue"
+// import "@/class/date.js"
 Vue.use(LoadPlugin)
+import ExportExcel from "./plugin/exportExcel/excelPlugin"
+Vue.use(ExportExcel)
 Vue.component('sn-table', Table)
 Vue.component('sn-table-tool', TableTool)
 Vue.prototype.$bus = new Vue();
@@ -21,7 +24,7 @@ Vue.use(Element, {
 import './font/global.css'
 Vue.config.productionTip = false
 import "./promise"
-new Vue({
+export default new Vue({
   router,
   store,
   i18n,

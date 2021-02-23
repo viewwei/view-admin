@@ -1,14 +1,14 @@
 <template>
   <el-tag
-    :color="scope.readFunc(row, scope).color"
+    :color="scope.readFunc(row, scope,index,sourceData).color"
     effect="dark"
     :hit="false"
     size="small"
     @click="tableTagClick"
   >
     <svg-icon
-      v-if="scope.readFunc(row, scope).icon.length > 0"
-      :icon-class="scope.readFunc(row, scope).icon"
+      v-if="scope.readFunc(row, scope,index,sourceData).icon.length > 0"
+      :icon-class="scope.readFunc(row, scope,index,sourceData).icon"
       class="svg-icon"
     ></svg-icon>
     {{
@@ -20,6 +20,7 @@
 </template>
 <script>
 export default {
+    inheritAttrs: false,
   props: {
     // 代表源数据
     row: {
