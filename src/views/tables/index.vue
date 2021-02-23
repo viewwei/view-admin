@@ -73,11 +73,14 @@ export default {
     // 超级链接，row代表返回行数据，scope代表返回config中的params中想对应的数据
     linkClick(row,scope){
      console.log("excel:",this.$excel);
-     this.$excel.exportExcelEntry(
-       this.tableStyle.params,
-       this.sourceData,
-    "view"
-       )
+     debugger
+     this.$tip.install = "ddd"
+     console.log(this.$tip)
+    //  this.$excel.exportExcelEntry(
+    //    this.tableStyle.params,
+    //    this.sourceData,
+    // "view"
+    //    )
     //   console.log("link",row,scope)
     //    let sourceOriginAmount = [
     //     {

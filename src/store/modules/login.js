@@ -11,6 +11,10 @@ const mutations = {
             state.roles = ["2"]
         }
         localStorage.setItem("login", true)
+    },
+    LOGINOUT:function(state){
+        debugger
+        localStorage.removeItem('login')
     }
 }
 const actions = {
@@ -32,7 +36,7 @@ const actions = {
     },
     getRoles({state}){
         return state.roles
-    }
+    },
 }
 
 export default {
