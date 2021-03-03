@@ -120,47 +120,47 @@
   </div>
 </template>
 <script>
-import FormStyle from "@/const/formStyleConst";
+import FormStyle from '@/const/formStyleConst'
 export default {
   computed: {
-    formData() {
-      let keys = Object.entries(this.formStyle.params);
-      let legKeys = keys.filter(([_, filedValue]) => {
-        if ((Object.prototype.toString.call(filedValue) != "[object Object]") || 
+    formData () {
+      const keys = Object.entries(this.formStyle.params)
+      const legKeys = keys.filter(([_, filedValue]) => {
+        if ((Object.prototype.toString.call(filedValue) != '[object Object]') ||
           (filedValue.hasOwnProperty('template') && filedValue.template == true)
         ) {
-          return false;
-        }else if (this.formStyle.params.hasOwnProperty('showFiled') &&filedValue[this.formStyle.params.showFiled] == false){
+          return false
+        } else if (this.formStyle.params.hasOwnProperty('showFiled') && filedValue[this.formStyle.params.showFiled] == false) {
         //  判断有无showFiled字段，如果存在,并且设置为false，则不显示
-         return false
+          return false
         }
-        return true;
-      });
-      
-      return legKeys;
-    },
+        return true
+      })
+
+      return legKeys
+    }
   },
   methods: {
-    getRule(rules, value) {
+    getRule (rules, value) {
       if (!Array.isArray(rules)) {
-        return [];
+        return []
       }
       for (let index = 0; index < rules.length; index++) {
-        let rule = rules[index];
+        const rule = rules[index]
         /**
          * 这里trigger的大概率方正就是
          * 下拉框选择blur,失去焦点触发
          * 输入框选择change变化
          * */
         if (
-          value.hasOwnProperty('ruleRely') && 
+          value.hasOwnProperty('ruleRely') &&
           this.formStyle.params.hasOwnProperty(value.ruleRely)
-          ) {
-            /**
+        ) {
+          /**
              * 这条代码的意思是当一个条件依赖其他条件的时候，可以使用这种方式，
              * ruleRely 会在validate函数的第一个参数返回，并且是ruleRely的值是一个响应数据
              * */
-            rule.ruleRely = this.formStyle.params[value.ruleRely]
+          rule.ruleRely = this.formStyle.params[value.ruleRely]
         }
         if (
           value.type == FormStyle.INPUT_STRING ||
@@ -169,12 +169,12 @@ export default {
         ) {
           // 代表普通输入框，密码框，数字框选择使用change
           if (
-            rule.hasOwnProperty("trigger") &&
-            ["blur", "change"].includes(rule.trigger)
+            rule.hasOwnProperty('trigger') &&
+            ['blur', 'change'].includes(rule.trigger)
           ) {
-            continue;
+            continue
           }
-          rule.trigger = "change";
+          rule.trigger = 'change'
         } else if (
           value.type == FormStyle.INPUT_SINGLE_SELECT ||
           value.type == FormStyle.INPUT_MULTIPLE_SELECT ||
@@ -182,24 +182,24 @@ export default {
           value.type == FormStyle.INPUT_TIME
         ) {
           // 代表下拉框，下拉多选框，日期选择框，时间选择框
-          rule.trigger = "blur"; //代表失去焦点触发
+          rule.trigger = 'blur' // 代表失去焦点触发
         }
       }
       return rules
-    },
+    }
   },
   props: {
     formStyle: {
       required: true,
-      type: Object,
-    },
+      type: Object
+    }
   },
-  data() {
+  data () {
     return {
-      FormStyle,
-    };
-  },
-};
+      FormStyle
+    }
+  }
+}
 </script>
 <style  scoped>
 .main >>> .el-form-item {

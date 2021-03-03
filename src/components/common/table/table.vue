@@ -213,148 +213,148 @@
   </div>
 </template>
 <script>
-import { TableNomalConst, TableConst } from "@/const/table.js";
-import elLink from "./templetes/elLink";
-import snTag from "./templetes/tableTag";
-import snModify from "./templetes/tableModify";
-import snSwitch from "./templetes/tableSwitch";
+import { TableNomalConst, TableConst } from '@/const/table.js'
+import elLink from './templetes/elLink'
+import snTag from './templetes/tableTag'
+import snModify from './templetes/tableModify'
+import snSwitch from './templetes/tableSwitch'
 export default {
   inheritAttrs: false,
   components: {
-    "sn-link": elLink, //超级链接栏目
-    "sn-tag": snTag, //标签栏目
-    "sn-modify": snModify, //修改栏目
-    "sn-switch": snSwitch, //开关按钮
+    'sn-link': elLink, // 超级链接栏目
+    'sn-tag': snTag, // 标签栏目
+    'sn-modify': snModify, // 修改栏目
+    'sn-switch': snSwitch // 开关按钮
   },
   props: {
     // 表格样式
     tableStyle: {
       type: Object,
-      required: true,
+      required: true
     },
     sourceData: {
       // 源数据，未加工数据
       type: Array,
-      required: true,
+      required: true
     },
     showType: {
-      //数据展示列表
+      // 数据展示列表
       // 0代表数据请求样式，1代表全部请求样式
       type: Number,
       required: false,
-      default: 0,
+      default: 0
     },
     totalNum: {
       // 网络请求的时候使用数量
       type: Number,
-      required: false,
+      required: false
     },
     pageNum: {
-      //当前页码
+      // 当前页码
       type: Number,
       required: false,
-      default: 1,
+      default: 1
     },
     pageSizes: {
       // 当前一页条目数据
       type: Number,
       required: false,
-      default: 10,
+      default: 10
     },
     loading: {
       type: Boolean,
       required: false,
-      default: true,
-    },
+      default: true
+    }
   },
   methods: {
-    headerDragend() {
-      this.doLayout();
+    headerDragend () {
+      this.doLayout()
     },
     // scope 代表表格的作用域插槽数据 item代表表格配置项数据中的operations遍历数据
-    tableOperationEvent(scope, item) {
-      item.event && this.$emit(item.event, scope.row);
+    tableOperationEvent (scope, item) {
+      item.event && this.$emit(item.event, scope.row)
     },
-    selectAll(section) {
-      this.$emit("selectAll", section);
+    selectAll (section) {
+      this.$emit('selectAll', section)
     },
-    selectionChange(section) {
-      this.$emit("selectAll", section);
+    selectionChange (section) {
+      this.$emit('selectAll', section)
     },
     // 改变页面条目
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       if (this.showType == 1) {
-        this.pageSize = val;
+        this.pageSize = val
       } else if (this.showType == 0) {
         // 代表是请求数据
       }
     },
     // 改变页码调用
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       if (this.showType == 1) {
-        this.currentPage = val;
+        this.currentPage = val
       }
-      this.$emit("handleSizeChange", {
+      this.$emit('handleSizeChange', {
         pagenum: val,
-        pagesize: this.pageSize,
-      });
+        pagesize: this.pageSize
+      })
     },
-    doLayout() {
+    doLayout () {
       this.$nextTick(() => {
-        this.$refs.commonTable.doLayout();
-      });
-    },
+        this.$refs.commonTable.doLayout()
+      })
+    }
   },
-  data() {
+  data () {
     return {
       TableConst,
-      currentPage: this.pageNum, //当前页码
-      pageSize: this.pageSizes, //一页条数
-    };
+      currentPage: this.pageNum, // 当前页码
+      pageSize: this.pageSizes // 一页条数
+    }
   },
   computed: {
     // 组装请求表格实例
-    getTableStyleData() {
+    getTableStyleData () {
       //   获取表格样式数据
-      let styleData = [];
+      let styleData = []
       if (!this.tableStyle.params) {
-        return;
+        return
       }
       styleData = Object.entries(this.tableStyle.params).filter((key) => {
-        const [fild, item] = key;
+        const [fild, item] = key
         //  判断是不是序号或者返回值是不是非对象
         if (
           fild == TableNomalConst.INDEX ||
-          !Object.is(typeof item, "object") ||
-          (Object.is(typeof item, "object") &&
+          !Object.is(typeof item, 'object') ||
+          (Object.is(typeof item, 'object') &&
             (item[this.tableStyle.params.tableShowField] == false ||
               item[this.tableStyle.params.tableHide] == false))
         ) {
-          return false;
+          return false
         }
-        return true;
-      });
-      return styleData;
+        return true
+      })
+      return styleData
     },
     // 组织表格数据
-    getTableSourceData() {
+    getTableSourceData () {
       if (this.showType == 0) {
-        return this.sourceData;
+        return this.sourceData
       }
-      let showData = [];
+      let showData = []
       showData = this.sourceData.slice(
         (this.currentPage - 1) * this.pageSize,
         this.currentPage * this.pageSize
-      );
-      return showData;
-    },
+      )
+      return showData
+    }
   },
   watch: {
-    getTableStyleData(val) {
-      this.doLayout();
-    },
-  },
-};
+    getTableStyleData (val) {
+      this.doLayout()
+    }
+  }
+}
 </script>
 <style scoped>
 .table-pagination >>> .el-input__inner {

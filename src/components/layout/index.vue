@@ -16,21 +16,21 @@
   </div>
 </template>
 <script>
-import { Sidebar, AppMain } from "./components";
-import {mapState } from "vuex"
+import { Sidebar, AppMain } from './components'
+import { mapState } from 'vuex'
 export default {
   components: {
     Sidebar,
-    AppMain,
+    AppMain
   },
   computed: {
-     ...mapState({
-         isOpen:state => state.sidebar.isOpen,
-         isCollapse:state => state.sidebar.isCollapse,
-         routers:state => state.router.systemRouters,
-         currentRouter:state=>state.router.currentRouter
-     }),
-  },
-};
+    ...mapState({
+      isOpen: state => state.sidebar.isOpen,
+      isCollapse: state => state.sidebar.isCollapse,
+      routers: state => state.router.systemRouters,
+      currentRouter: state => state.router.currentRouter
+    })
+  }
+}
 </script>
 <style  src="./index.scss" lang="scss" scoped></style>

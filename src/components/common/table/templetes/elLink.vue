@@ -5,31 +5,31 @@
 </template>
 <script>
 export default {
-    inheritAttrs: false,
+  inheritAttrs: false,
   methods: {
-    linkClick() { 
-    this.scope.event &&this.$emit(this.scope.event, this.row, this.scope);
-    },
+    linkClick () {
+      this.scope.event && this.$emit(this.scope.event, this.row, this.scope)
+    }
   },
   props: {
     scope: {
-      required: false,
+      required: false
     },
     row: {
-      required: false,
+      required: false
     },
     field: {
       type: String,
-      required: true,
+      required: true
     },
-    sourceData:{
-      type:Array,
-      required:true
+    sourceData: {
+      type: Array,
+      required: true
     },
-    index:{
-      type:Number,
-      required:false
+    index: {
+      type: Number,
+      required: false
     }
-  },
-};
+  }
+}
 </script>

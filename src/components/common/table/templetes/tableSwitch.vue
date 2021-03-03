@@ -10,40 +10,40 @@
 <script>
 export default {
   inheritAttrs: false,
-  data() {
+  data () {
     return {
-     
-      switchStyle:this.scope.readFunc ? this.scope.readFunc(this.row, this.scope, this.index, this.sourceData) : null
-    };
+
+      switchStyle: this.scope.readFunc ? this.scope.readFunc(this.row, this.scope, this.index, this.sourceData) : null
+    }
   },
   props: {
     // 代表源数据
     row: {
       type: Object,
-      required: false,
+      required: false
     },
     scope: {
       type: Object,
-      required: false,
+      required: false
     },
     field: {
       type: String,
-      required: true,
+      required: true
     },
     sourceData: {
       type: Array,
-      required: true,
+      required: true
     },
     index: {
       type: Number,
-      required: false,
-    },
+      required: false
+    }
   },
   methods: {
-    change() {
-      this.switchStyle.state = !this.switchStyle.state;
-      this.scope.event && this.$emit(this.scope.event,this.row, this.scope, this.index, this.sourceData, this.switchStyle.state)
-    },
-  },
-};
+    change () {
+      this.switchStyle.state = !this.switchStyle.state
+      this.scope.event && this.$emit(this.scope.event, this.row, this.scope, this.index, this.sourceData, this.switchStyle.state)
+    }
+  }
+}
 </script>

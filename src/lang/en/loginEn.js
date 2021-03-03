@@ -1,3 +1,3 @@
 export default {
-    music2:"Music"
+  music2: 'Music'
 }

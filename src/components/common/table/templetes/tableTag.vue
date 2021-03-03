@@ -20,41 +20,41 @@
 </template>
 <script>
 export default {
-    inheritAttrs: false,
+  inheritAttrs: false,
   props: {
     // 代表源数据
     row: {
       type: Object,
-      required: false,
+      required: false
     },
     scope: {
       type: Object,
-      required: false,
+      required: false
     },
     field: {
       type: String,
-      required: true,
+      required: true
     },
     sourceData: {
       type: Array,
-      required: true,
+      required: true
     },
     index: {
       type: Number,
-      required: false,
-    },
+      required: false
+    }
   },
   computed: {
-    getTagStyle() {
-      return this.scope.styleFunc(this.row);
-    },
+    getTagStyle () {
+      return this.scope.styleFunc(this.row)
+    }
   },
-  methods:{
-      tableTagClick(){
-          this.scope.event && this.$emit(this.scope.event,this.row,this.scope)
-      }
+  methods: {
+    tableTagClick () {
+      this.scope.event && this.$emit(this.scope.event, this.row, this.scope)
+    }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .el-tag--dark {

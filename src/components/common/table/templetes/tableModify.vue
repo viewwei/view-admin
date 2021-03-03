@@ -31,54 +31,54 @@
 </template>
 <script>
 export default {
-    inheritAttrs: false,
-  data() {
+  inheritAttrs: false,
+  data () {
     return {
       input: this.scope.readFunc
         ? this.scope.readFunc(this.row, this.scope, this.index, this.sourceData)
         : this.row[this.field],
-      show: true,
-    };
+      show: true
+    }
   },
   methods: {
-    operationClick(type) {
-      this.show = !this.show;
+    operationClick (type) {
+      this.show = !this.show
       if (!this.show) {
         this.$nextTick(() => {
-          this.$refs.input.focus();
-        });
+          this.$refs.input.focus()
+        })
       }
       if (type == 0) {
         // 代表确定,需要发送请求
         this.scope.event &&
-          this.$emit(this.scope.event, this.row, this.scope, this.input);
+          this.$emit(this.scope.event, this.row, this.scope, this.input)
       }
-    },
+    }
   },
   props: {
     // 代表源数据
     row: {
       type: Object,
-      required: false,
+      required: false
     },
     scope: {
       type: Object,
-      required: false,
+      required: false
     },
     field: {
       type: String,
-      required: true,
+      required: true
     },
     sourceData: {
       type: Array,
-      required: true,
+      required: true
     },
     index: {
       type: Number,
-      required: false,
-    },
-  },
-};
+      required: false
+    }
+  }
+}
 </script>
 <style scoped>
 .table-modify >>> .el-input__inner {

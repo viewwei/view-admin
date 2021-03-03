@@ -1,3 +1,3 @@
 export default {
-    music:"Musi2c"
+  music: 'Musi2c'
 }

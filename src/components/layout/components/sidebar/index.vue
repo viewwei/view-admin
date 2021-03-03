@@ -42,43 +42,42 @@
 </template>
 <script>
 export default {
-  name: "side-bar",
-  data() {
-    return {};
+  name: 'side-bar',
+  data () {
+    return {}
   },
   props: {
     // 定义加载的类型
     styleValue: {
       type: Number,
       required: true,
-      default: 0,
+      default: 0
     },
     childrenRouter: {
       // type:Object,
-      required: true,
+      required: true
     },
     routerInfo: {
       type: Object,
-      required: false,
+      required: false
     },
     collapse: {
       type: Boolean,
-      required: false,
+      required: false
     },
     default_active: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   methods: {
-    selectMenu(key) {
-      if (key != this.default_active)
-      {
-            this.$router.push(key);
+    selectMenu (key) {
+      if (key != this.default_active) {
+        this.$router.push(key)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style src="./index.scss" lang="scss" scoped >
 </style>

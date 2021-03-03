@@ -14,9 +14,9 @@ export default {
   components: {
     HelloWorld
   },
-  mounted(){
-      // this.$store.dispatch('errorLog/clearErrorLog')
-    console.log("view:",this.$store.state.test)
+  mounted () {
+    // this.$store.dispatch('errorLog/clearErrorLog')
+    console.log('view:', this.$store.state.test)
   }
 }
 </script>

@@ -14,7 +14,7 @@
       </button>
       <el-dropdown-menu slot="dropdown" class="mode-dropdown">
           <div v-for="([filed,filedValue],itemValue) in Object.entries(sourceData.params )" :key="itemValue">
-            <el-checkbox v-if="filed !='index' && 
+            <el-checkbox v-if="filed !='index' &&
             (Object.is(typeof filedValue,'object' )) &&
             (filedValue[sourceData.params.tableShowField] == true)"
             v-model="filedValue[sourceData.params.tableHide]"
@@ -29,20 +29,20 @@ export default {
   props: {
     sourceData: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
-      checkList: [],
-    };
+      checkList: []
+    }
   },
   methods: {
-    selectDataModel(value) {
-      this.$emit('selectDataModel',value)
-    },
-  },
-};
+    selectDataModel (value) {
+      this.$emit('selectDataModel', value)
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .table-tool {

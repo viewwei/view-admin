@@ -44,12 +44,12 @@ export default {
   props: {
     msg: String
   },
-  data(){
+  data () {
     return {
-      
+
     }
   },
-  mounted(){
+  mounted () {
   }
 }
 </script>

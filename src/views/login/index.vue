@@ -26,40 +26,38 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
-        usename: "admin",
-        password: "admin",
-      },
-    };
+        usename: 'admin',
+        password: 'admin'
+      }
+    }
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    loginClick() {
-      this.$load.loading();
-        this.$store
-          .dispatch("login/login", {
-            username: this.loginForm.usename,
-            password: this.loginForm.password,
-          })
-          .then(() => {
-            this.$load.closeLoading();
-             let redirect = this.$route.query.redirect;
-        if (redirect) {
-          this.$router.replace(redirect);
-        } else {
-          this.$router.replace("/");
-        }
-          })
-          .catch(() => {
-            this.$load.closeLoading();
-          });
-
-       
-    },
-  },
-};
+    loginClick () {
+      this.$load.loading()
+      this.$store
+        .dispatch('login/login', {
+          username: this.loginForm.usename,
+          password: this.loginForm.password
+        })
+        .then(() => {
+          this.$load.closeLoading()
+          const redirect = this.$route.query.redirect
+          if (redirect) {
+            this.$router.replace(redirect)
+          } else {
+            this.$router.replace('/')
+          }
+        })
+        .catch(() => {
+          this.$load.closeLoading()
+        })
+    }
+  }
+}
 </script>
 <style  scoped>
 
