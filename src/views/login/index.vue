@@ -18,7 +18,7 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary" class="v-login-btn" @click="loginClick"
+      <el-button type="primary" size="medium " class="v-login-btn" @click="loginClick"
         >Login</el-button
       >
     </div>
@@ -62,6 +62,7 @@ export default {
 };
 </script>
 <style  scoped>
+
 .v-main >>> .el-input__inner
 {
    padding-left: 40px  !important;
@@ -69,6 +70,21 @@ export default {
 }
 </style>
 <style   lang="scss" scoped>
+.el-input__inner {
+    // padding: 25px 0px;
+    background-color: transparent;
+    // padding-left: 40px  !important;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+.el-input__inner:focus{
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.el-input__inner:hover{
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+}
 .v-login-main {
   width: 100%;
   height: 100%;

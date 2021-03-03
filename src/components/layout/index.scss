@@ -8,6 +8,7 @@
     .v-slider {
         width: 220px;
         height: 100%;
+        // min-height: 200px;
         background-color: $menuBg;
     }
     .v-slider-with {
@@ -17,9 +18,10 @@
     }
     .v-main {
         height: 100%;
-        flex: 1;
+        // flex: 1;
         overflow-x: hidden;
         overflow-y: auto;
+        width: 100%;
     }
 }
 

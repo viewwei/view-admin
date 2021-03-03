@@ -1,4 +1,4 @@
-const isLogin = () =>{
+const isLogin = () => {
     return localStorage.getItem("login")
 }
-export {isLogin}
+export { isLogin }

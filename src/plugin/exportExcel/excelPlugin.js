@@ -29,7 +29,7 @@ ExcelPlugin.install = (Vue, option) => {
         }
         exportExcelEntry(params, sourceData, fileName, callback) {
             // params代表config.params数据，sourceData代表数据来源
-            if (Object.prototype.toString.call(params) === '[object object]') {
+            if (Object.prototype.toString.call(params) === '[object Object]') {
                 callback(new Error(1))
                 return
             }
@@ -73,7 +73,7 @@ ExcelPlugin.install = (Vue, option) => {
                             let exportValue = params[key][TableNomalConst.EXPORTFUNC](element)
                             values.push(exportValue)
                         } else {
-                            if (!element.hasOwnProperty(key) && Object.prototype.toString.call(element[key]) != '[object object]') {
+                            if (!element.hasOwnProperty(key) && Object.prototype.toString.call(element[key]) != '[object Object]') {
                                 values.push("")
                             } else {
                                 values.push(element[key])

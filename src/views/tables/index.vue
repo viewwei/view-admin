@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="main">
     <sn-table-tool :sourceData="tableStyle" @selectDataModel="selectDataModel"></sn-table-tool>
+    <sn-form :formStyle="formConfig"></sn-form>
     <sn-table
+      class="table"
       :sourceData="sourceData"
       :tableStyle="tableStyle"
       :stripe="true"
@@ -23,12 +25,14 @@
 </template>
 <script>
 const json = require("./config.js").default;
+const formConfig = require("./formConfig").default
 export default {
   data() {
     return {
       tableStyle: json,//table的结构
       loading: true,//load加载按钮
       selectData:[],// 当前选中的数据
+      formConfig:formConfig,//表单数据
       sourceData:[
         {
           deviceName: '才走',
@@ -65,6 +69,8 @@ export default {
     setTimeout(() => {
       this.loading = false;
     }, 2000);
+    debugger
+    this.$form.setFormPropertyValue(this.formConfig.params,{})
   },
   methods: {
     addEvent(row) {
@@ -72,50 +78,6 @@ export default {
     },
     // 超级链接，row代表返回行数据，scope代表返回config中的params中想对应的数据
     linkClick(row,scope){
-     console.log("excel:",this.$excel);
-     debugger
-     this.$tip.install = "ddd"
-     console.log(this.$tip)
-    //  this.$excel.exportExcelEntry(
-    //    this.tableStyle.params,
-    //    this.sourceData,
-    // "view"
-    //    )
-    //   console.log("link",row,scope)
-    //    let sourceOriginAmount = [
-    //     {
-    //         goodsName: '苹果',
-    //         sourceCode: '123'
-    //     },
-    //     {
-    //         goodsName: '香蕉',
-    //         sourceCode: '234'
-    //     }
-    // ]; 
-    // const tHeader = ['编号', '商品名称', '溯源码']; //表格表头
-    // const filterVal = ['index', 'goodsName', 'sourceCode']; //要渲染的列
-    // this.turnToExcel(sourceOriginAmount,tHeader,filterVal,'表格名字') //调用封装的函数
-},
-turnToExcel(sourceOriginAmount,tHeader,filterVal,filename){
-  import('@/plugin/exportExcel/Export2Excel.js').then(excel => { // 导入js模块
-          const list = (sourceOriginAmount || []).map((item, key) => { // 通过 map 方法遍历，组装数据成上面的格式
-              let obj_index={index:key+1}
-              let obj={...item,...obj_index}
-              return obj
-          });
-          if (list) {
-              const data = list.map(v => filterVal.map(j => v[j]));// 生成json数据
-              debugger
-              excel.export_json_to_excel({ // 调用excel方法生成表格
-                  header: tHeader,
-                  data,
-                  filename
-              });
-          } else {
-              alert('暂无无数据');
-          }
-          // this.loading = false;
-      })
 },
     handleSizeChange(playload) {
       // 页码变化和页码条目变化数据，playload为有一个对象 pagenum,pagesize两个属性
@@ -143,3 +105,6 @@ turnToExcel(sourceOriginAmount,tHeader,filterVal,filename){
   },
 };
 </script>
+<style lang="scss" scoped>
+
+</style>
