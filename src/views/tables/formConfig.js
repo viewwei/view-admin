@@ -14,9 +14,7 @@ const config = {
       ruleRely: 'deviceName2',
       transformationFunc: function (target) {
         // mode转换方法
-        console.log(this)
-        debugger
-        return ''
+        return '1'
       },
       rules: [
         {
@@ -34,7 +32,7 @@ const config = {
           trigger: 'change'
         }
       ],
-      emptyMark: '' // 空标记:代表这个输入框没有填写
+      defaultValue: '' // 默认值:代表这个输入框没有填写
     },
     deviceName2: {
       label: '333cccccccccccccccccccccccccc',

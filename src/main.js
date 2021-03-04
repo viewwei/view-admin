@@ -32,6 +32,7 @@ Vue.use(LoadPlugin)
 Vue.use(ExportExcel)
 Vue.use(Tip)
 Vue.use(Form)
+// Vue.use(Twaver)
 export default new Vue({
   router,
   store,

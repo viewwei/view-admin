@@ -1,7 +1,7 @@
 import { Message } from 'element-ui'
 import i18n from '@/lang/index'
 const Tip = {
-  success ({
+  success({
     message = i18n.t('success'),
     duration = 1,
     callback
@@ -16,7 +16,7 @@ const Tip = {
       callback && callback()
     }, duration * 1000)
   },
-  error ({
+  error({
     message = i18n.t('success'),
     duration = 1,
     callback

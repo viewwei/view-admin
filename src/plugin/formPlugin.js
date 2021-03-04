@@ -1,3 +1,4 @@
+
 /**
  * 表单相关操作
  * */
@@ -5,9 +6,9 @@ class Form {
   /**
      *为表单config设置值
      * */
-  setFormPropertyValue (params, sourceData) {
+  setFormPropertyValue(params, sourceData) {
     if (Object.prototype.toString.call(params) != '[object Object]' ||
-            Object.prototype.toString.call(sourceData) != '[object Object]'
+      Object.prototype.toString.call(sourceData) != '[object Object]'
     ) {
       return false
     }
@@ -23,14 +24,27 @@ class Form {
         const value = transformationFunc.call(params, sourceData)
         params[filed].value = value
       } else {
-        params[filed].value = sourceData.hasOwnProperty(filed)
-          ? sourceData[filed] : null
+        let value
+        if (params[filed].hasOwnProperty('defaultValue')) {
+          // 有设置默认值
+          if (sourceData.hasOwnProperty(filed)) {
+            value = sourceData[filed]
+          } else {
+            value = params[filed]['defaultValue']
+          }
+        } else {
+          // 没有设置默认值
+          value = sourceData.hasOwnProperty(filed)
+            ? sourceData[filed] : null
+        }
+        params[filed].value = value
       }
+
     }
     return true
   }
-
-  getFormPropertyValue (params, seat = null, limit = true) {
+  // 把表单的值赋值给params对应的字段
+  getFormPropertyValue(params, seat = null, limit = true) {
     if (Object.prototype.toString.call(params) != '[object Object]') {
       return false
     }
@@ -39,14 +53,16 @@ class Form {
     for (let index = 0; index < keys.length; index++) {
       const [filed, filedValue] = keys[index]
       if (Object.prototype.toString.call(filedValue) != '[object Object]') {
+        continue
+      } else if (Object.prototype.toString.call(filedValue) == '[object Object]') {
         if (limit) {
-          if (params.hasOwnProperty('showFiled') && filedValue[params[showFiled]] == true) {
+          if (params.hasOwnProperty('showFiled') && filedValue[params['showFiled']] == false) {
             continue
           }
         }
       }
       let getValue
-      if (params[filed].hasOwnProperty('emptyMark') && params[filed].value === params[filed].emptyMark) {
+      if (params[filed].hasOwnProperty('defaultValue') && params[filed].value === params[filed].defaultValue) {
         // 代表这个数值为空
         getValue = seat
       } else {
@@ -54,8 +70,34 @@ class Form {
       }
       transformationParams[filed] = getValue
     }
+    return transformationParams
+  }
+  // 给params,恢复默认值
+  resetFormParams(params) {
+    if (Object.prototype.toString.call(params) != "[objec Object]") {
+      //  params不是对象，直接返回
+      return false
+    }
+    let keys = Object.entries(params)
+    for (let index = 0; index < keys.length; index++) {
+      const [, filedValue] = keys[index]
+      if (Object.prototype.toString.call(filedValue) != "[object Object]") {
+        // 非对象即参数补充信息
+        continue
+      }
+      if (filedValue.hasOwnProperty("value")) {
+        // 没有设置value,只所以要判断一次，目的为防止filedValue没有value属性
+        // 运动.value会新生成value属性,这会导致value不是响应式数据
+        if (filedValue.hasOwnProperty('defaultValue')) {
+          filedValue.value = filedValue['defaultValue']
+        } else {
+          filedValue.value = ""
+        }
+      }
+    }
     return true
   }
+
 }
 Form.install = function (_Vue) {
   const Vue = _Vue

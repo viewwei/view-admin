@@ -9,6 +9,7 @@ module.exports = {
   outputDir: 'build',
   assetsDir: 'resource',
   productionSourceMap: true,
+
   devServer: {
     port: port,
     open: true,
@@ -20,6 +21,9 @@ module.exports = {
   css: {
   },
   configureWebpack: {
+    externals: {
+      twaver: 'twaver'
+    },
     name: 'view_ui',
     resolve: {
       alias: {
@@ -28,6 +32,7 @@ module.exports = {
     }
   },
   chainWebpack (config) {
+    
     // set svg-sprite-loader
     config.module
       .rule('svg')

@@ -5,7 +5,6 @@
 const date = Date.prototype
 const SNDate = Object.create(date)
 SNDate.getCurrentDate = (currentDate, fmt) => {
-  console.log('current no')
   var o = {
     'M+': currentDate.getMonth() + 1, // 月份
     'd+': currentDate.getDate(), // 日

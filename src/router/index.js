@@ -11,7 +11,7 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/views/login/index.
 const Test1 = () => import(/* webpackChunkName: "test1" */ '@/components/test/index1.vue')
 const Test2 = () => import(/* webpackChunkName: "test2" */ '@/components/test/index2.vue')
 const Test3 = () => import(/* webpackChunkName: "test3" */ '@/components/test/index3.vue')
-
+const twaver=() => import('@/views/twaver/index')
 Vue.use(VueRouter)
 const routes = [
   {
@@ -45,50 +45,37 @@ const asyncRoutes = [
     name: 'table',
     redirect: '/table/index',
     meta: {
-      title: '表格',
+      title: '业务代码',
       icon: 'table'
     },
     children: [
       {
-        path: 'index',
+        path: '/table/index',
         name: 'tableIndex',
-        component: Table
+        component: Table,
+        meta: {
+          title: 'table',
+          icon: 'table',
+          roles: ['1', '2']
+        }
+      },
+      {
+        path: '/table/twaver',
+        name: 'twaver',
+        component: twaver,
+        meta: {
+          title: 'twaver',
+          icon: 'table',
+          roles: ['1', '2']
+        }
       }
     ],
-    meta: {
-      title: 'table',
-      icon: 'table',
-      roles: ['1', '2']
-    }
+    // meta: {
+    //   title: 'table',
+    //   icon: 'table',
+    //   roles: ['1', '2']
+    // }
   }
-  // {
-  //   path:'/test1',
-  //   name:"test1",
-  //   component:Test1,
-  //   meta:{
-  //     title:"test1",
-  //     roles:["1","2"]
-  //   }
-  // },
-  // {
-  //   path:'/test2',
-  //   name:"test2",
-  //   component:Test2,
-  //   meta:{
-  //     title:"test1",
-  //     roles:["1","2"]
-  //   }
-  // },
-  // {
-  //   path:'/test3',
-  //   name:"test3",
-  //   component:Test3,
-  //   meta:{
-  //     title:"test1",
-  //     roles:["1"]
-  //   }
-  // },
-
 ]
 const router = new VueRouter({
   routes
