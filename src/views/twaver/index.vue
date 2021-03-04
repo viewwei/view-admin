@@ -2,7 +2,7 @@
   <div id="twaver"></div>
 </template>
 <script>
-import TwaverPlugin from "@/plugin/twaverPlugin";
+import TwaverPlugin from "@/class/twaverPlugin";
 const twaver = new TwaverPlugin();
 export default {
   data() {
@@ -16,7 +16,6 @@ export default {
         y:20
       },
     });
-    debugger
     twaver.createSigleNode({
         name:"2222222"
     })

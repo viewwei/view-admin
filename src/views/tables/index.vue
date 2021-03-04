@@ -87,6 +87,7 @@ export default {
       console.log('操作:', operation)
     },
     selectAll (selection) {
+      console.log("selection：",selection)
       if (selection.length > 0) {
         this.tableStyle.tool[1].disabled = false
       } else {
