@@ -33,3 +33,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+ a:hover{
+  text-decoration: none;
+}
+</style>

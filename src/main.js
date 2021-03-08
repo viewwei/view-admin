@@ -22,7 +22,6 @@ import CommonForm from '@/components/common/form/form.vue'
 Vue.component('sn-table', Table)
 Vue.component('sn-table-tool', TableTool)
 Vue.component('sn-form', CommonForm)
-
 Vue.prototype.$bus = new Vue()
 Vue.use(Element, {
   size: 'mini' // set element-ui default size

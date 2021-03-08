@@ -9,8 +9,10 @@
       />
     </div>
     <div class="v-main">
-      <div>{{ currentRouter }}</div>
-      <div>vvv</div>
+      <div>vvvv</div>
+      <div>
+        <BreadCrumb :breadcrumb="getRouterInfor()"/>
+      </div>
       <appMain />
     </div>
   </div>
@@ -18,10 +20,13 @@
 <script>
 import { Sidebar, AppMain } from './components'
 import { mapState } from 'vuex'
+import {computedRouting} from "@/utils/routerUtil"
+import BreadCrumb from "./routerbreadcrumb"
 export default {
   components: {
     Sidebar,
-    AppMain
+    AppMain,
+    BreadCrumb,//路由面包屑
   },
   computed: {
     ...mapState({
@@ -30,6 +35,11 @@ export default {
       routers: state => state.router.systemRouters,
       currentRouter: state => state.router.currentRouter
     })
+  },
+  methods:{
+    getRouterInfor(){
+    return  computedRouting(this.currentRouter)
+    }
   }
 }
 </script>

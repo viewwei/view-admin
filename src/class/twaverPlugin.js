@@ -10,7 +10,7 @@ class TwaverPlugin {
     initNetwork({ canvasDivId, data = {}, viewColor = "oldlace", selectColor = "#57ab9a" }) {
         const { x = 0, y = 0, width, height } = data
         // 初始化一次就不在初始化了
-        if (!this.isInit) {
+        // if (!this.isInit) {
             this.isInit = true
             this._box = new this._twaver.ElementBox()
             this._network = new this._twaver.vector.Network(this._box)
@@ -35,9 +35,9 @@ class TwaverPlugin {
             })
             this._twaver.Styles.setStyle('select.color', selectColor)
             return true
-        } else {
-            return false
-        }
+        // } else {
+        //     return false
+        // }
     }
     //单一节点的注册
     createSigleNode({ name = "", name2, loction, image, size }, belong) {

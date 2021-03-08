@@ -32,13 +32,15 @@ const config = {
           trigger: 'change'
         }
       ],
-      defaultValue: '' // 默认值:代表这个输入框没有填写
+      defaultValue: '', // 默认值:代表这个输入框没有填写
+      span:6
     },
     deviceName2: {
       label: '333cccccccccccccccccccccccccc',
       value: '',
       show: true,
-      type: FormStyle.INPUT_NUMBER
+      type: FormStyle.INPUT_NUMBER,
+      offset:0
 
     },
     deviceName21: {

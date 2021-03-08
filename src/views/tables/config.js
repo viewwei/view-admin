@@ -69,9 +69,10 @@ const config = {
     // 一条完整的数据
     deviceName: {
       label: '设备名称',
-      // readType:TableConst.NORMAL,//读取方式
+      readType:TableConst.NORMAL,//读取方式
       show: true, // 设备名称需要打开,
-      hide: true// 设备名称需要展示
+      hide: true,// 设备名称需要展示
+      minWidth:200
     },
     deviceIp: {
       label: '设备Ip',

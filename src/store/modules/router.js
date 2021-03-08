@@ -10,6 +10,9 @@ const mutations = {
   },
   SAVE_CURRENT_ROUTER: function (state, router) {
     state.currentRouter = router
+  },
+  REMOVEROUTER:function(state){
+    state.systemRouters = []
   }
 }
 const actions = {
@@ -33,6 +36,9 @@ const actions = {
       }
       resolve(accessedRoutes)
     })
+  },
+  removeSystemRouter({commit}){
+      commit("REMOVEROUTER")
   }
 }
 // 过滤需要的路由

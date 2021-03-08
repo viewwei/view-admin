@@ -1,5 +1,6 @@
 const path = require('path')
 const port = process.env.port || 9527
+const zipPlugin = require('./src/webpackPlugin/zip')
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
@@ -8,7 +9,7 @@ module.exports = {
   publicPath: './',
   outputDir: 'build',
   assetsDir: 'resource',
-  productionSourceMap: true,
+  productionSourceMap: false,
 
   devServer: {
     port: port,
@@ -21,16 +22,37 @@ module.exports = {
   css: {
   },
   configureWebpack: {
-    externals: {
-      twaver: 'twaver'
+    // externals: {
+    //   twaver: 'twaver'
+    // },
+    //警告 webpack 的性能提示
+    performance: {
+      hints:'warning',
+      //入口起点的最大体积
+      maxEntrypointSize: 50000000,
+      //生成文件的最大体积
+      maxAssetSize: 30000000,
+      //只给出 js 文件的性能提示
+      assetFilter: function(assetFilename) {
+        return assetFilename.endsWith('.js');
+      }
     },
+
     name: 'view_ui',
+    plugins:[
+      new zipPlugin({
+        filePath:path.resolve(__dirname,"build"),
+        zipPath:path.resolve(__dirname,"target"),
+        zipName:"view"
+      })
+    ],
     resolve: {
       alias: {
         '@': resolve('src')
       }
     }
   },
+
   chainWebpack (config) {
     
     // set svg-sprite-loader
@@ -82,6 +104,7 @@ module.exports = {
        * 需要把runtime代码内联到index.html中。需要使用script-ext-html-webpack-plugin
        * */
       // config => {
+        
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
         .after('html')

@@ -1,9 +1,10 @@
 <template>
   <div class="main">
-    <el-form ref="form" :model="formStyle" :inline="true">
+    <el-form :ref="formStyle.params.ref || 'commonForm'" :model="formStyle">
       <el-row>
         <el-col
-          :span="filedValue.hasOwnProperty('span') ? filedValue.span : 10"
+          :offset="getOffset(filedValue)"
+          :span="filedValue.hasOwnProperty('span') ? filedValue.span : 6"
           v-for="([filed, filedValue], index) in formData"
           :key="index"
         >
@@ -136,11 +137,20 @@ export default {
         }
         return true
       })
-
       return legKeys
     }
   },
   methods: {
+    test1(){
+      console.log("ddddd");
+    },
+    // 获取offset
+    getOffset(filedValue){
+      if (filedValue.hasOwnProperty("offset") && !isNaN(Number(filedValue.offset))){
+        return parseInt(filedValue.offset)
+      }
+    },
+    // 规则判断
     getRule (rules, value) {
       if (!Array.isArray(rules)) {
         return []

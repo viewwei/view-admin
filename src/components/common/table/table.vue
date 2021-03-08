@@ -90,9 +90,21 @@
       </el-table-column>
       <!-- 表单内容内容操作下 -->
       <template v-for="([filed, filedItem], index) of getTableStyleData">
+          <el-table-column
+          :key="index"
+          v-if="Boolean($scopedSlots[getSlotName(filedItem,filed)])"
+          :label="filedItem.label"
+          :min-width="filedItem.minWidth"
+          :show-overflow-tooltip="true"
+          >
+            <template slot-scope="{row}">
+              <slot :name="getSlotName(filedItem,filed)" :row="row"/>
+            </template>
+          </el-table-column>
+
         <!-- 1.代表正常读取+展示数据，数据不需要加工 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.NORMAL || !filedItem.readType"
+          v-else-if="filedItem.readType == TableConst.NORMAL || !filedItem.readType"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth"
@@ -104,7 +116,7 @@
         </el-table-column>
         <!-- 代表通过函数读取，返回当前行数和这一行的数据 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.FUNCTION"
+          v-else-if="filedItem.readType == TableConst.FUNCTION"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth"
@@ -118,7 +130,7 @@
         </el-table-column>
         <!-- 代表超级链接 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.LINK"
+         v-else-if="filedItem.readType == TableConst.LINK"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth"
@@ -137,7 +149,7 @@
         </el-table-column>
         <!-- 代表tag布局 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.TAG"
+          v-else-if="filedItem.readType == TableConst.TAG"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth ? filedItem.minWidth : '100'"
@@ -156,7 +168,7 @@
         </el-table-column>
         <!-- 代表修改 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.MODIFY"
+         v-else-if="filedItem.readType == TableConst.MODIFY"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth ? filedItem.minWidth : '170'"
@@ -175,7 +187,7 @@
         </el-table-column>
         <!-- 代表switch 按钮 -->
         <el-table-column
-          v-if="filedItem.readType == TableConst.SWITCH"
+          v-else-if="filedItem.readType == TableConst.SWITCH"
           :key="index"
           :label="filedItem.label"
           :min-width="filedItem.minWidth ? filedItem.minWidth : '100'"
@@ -267,7 +279,20 @@ export default {
       default: true
     }
   },
+  mounted(){
+      console.log("slots:",this.$scopedSlots);
+  },
   methods: {
+    // 获取插槽的名称
+    getSlotName(filedValue,filed){
+      if (filedValue.hasOwnProperty('slot') && 
+      Object.prototype.toString.call(filedValue['slot'])
+      ){
+        return filedValue['slot']
+      }else{
+        return filed
+      }
+    },
     headerDragend () {
       this.doLayout()
     },

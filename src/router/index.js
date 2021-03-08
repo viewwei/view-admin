@@ -11,7 +11,11 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/views/login/index.
 const Test1 = () => import(/* webpackChunkName: "test1" */ '@/components/test/index1.vue')
 const Test2 = () => import(/* webpackChunkName: "test2" */ '@/components/test/index2.vue')
 const Test3 = () => import(/* webpackChunkName: "test3" */ '@/components/test/index3.vue')
-const twaver=() => import('@/views/twaver/index')
+const twaver = () => import('@/views/twaver/index')
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter)
 const routes = [
   {
@@ -25,9 +29,22 @@ const routes = [
     },
     children: [
       {
-        path: 'a',
+        path: '/a',
         name: 'a',
         component: Test1
+      }
+    ]
+  },
+  {
+    path: "/test2",
+    name: "test2",
+    component: layout,
+    redirect: '/test2/a',
+    children: [
+      {
+        path: '/test2/a',
+        name: 'test2',
+        component: Test2
       }
     ]
   },
@@ -70,15 +87,21 @@ const asyncRoutes = [
         }
       }
     ],
-    // meta: {
-    //   title: 'table',
-    //   icon: 'table',
-    //   roles: ['1', '2']
-    // }
   }
 ]
-const router = new VueRouter({
-  routes
+// const router = new VueRouter({
+//   routes
+// })
+const createRouter = () => new VueRouter({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: routes
 })
-export { asyncRoutes, routes }
+const router = createRouter()
+// 重置路由需要在权限变化和登出的时候出现
+const resetRouter = () => {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+export { asyncRoutes, routes, resetRouter }
 export default router

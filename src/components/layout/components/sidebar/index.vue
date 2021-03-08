@@ -8,7 +8,7 @@
       :default-active="default_active"
     >
       <side-bar
-        :styleValue="item.children && item.children.length > 1 ? 1 : 2"
+        :styleValue="item.children && item.children.length > 1 ? 1 : 3"
         :childrenRouter="item.children"
         :routerInfo="item"
         v-for="(item, index) in childrenRouter"
@@ -16,7 +16,12 @@
       />
     </el-menu>
     <el-submenu :index="routerInfo.path" v-if="styleValue == 1">
-      <span slot="title">{{ routerInfo.name }}</span>
+      <span slot="title">
+        <i>
+          <svg-icon :icon-class="getIcon(routerInfo)" class="svgIcon" />
+        </i>
+        {{ getTitle(routerInfo) }}</span
+      >
       <div v-if="childrenRouter && childrenRouter.length > 0">
         <side-bar
           :styleValue="item.children && item.children.length > 0 ? 1 : 2"
@@ -29,55 +34,67 @@
     </el-submenu>
     <el-menu-item
       :index="routerInfo.redirect ? routerInfo.redirect : routerInfo.path"
-      v-if="styleValue == 2"
+      v-if="styleValue == 2 ||styleValue == 3  "
     >
-      <i>
-        <svg-icon :icon-class="routerInfo.meta.icon" class="svgIcon" />
+      <i v-if="styleValue == 3">
+        <svg-icon :icon-class="getIcon(routerInfo)" class="svgIcon" />
       </i>
       <span slot="title" :to="routerInfo.path" tag="span">
-        {{ routerInfo.name }}</span
+        {{ getTitle(routerInfo) }}</span
       >
     </el-menu-item>
   </div>
 </template>
 <script>
 export default {
-  name: 'side-bar',
-  data () {
-    return {}
+  name: "side-bar",
+  data() {
+    return {};
   },
   props: {
     // 定义加载的类型
     styleValue: {
       type: Number,
       required: true,
-      default: 0
+      default: 0,
     },
     childrenRouter: {
       // type:Object,
-      required: true
+      required: true,
     },
     routerInfo: {
       type: Object,
-      required: false
+      required: false,
     },
     collapse: {
       type: Boolean,
-      required: false
+      required: false,
     },
     default_active: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   methods: {
-    selectMenu (key) {
+    selectMenu(key) {
       if (key != this.default_active) {
-        this.$router.push(key)
+        this.$router.push(key);
       }
+    },
+    getIcon(routerInfo){
+      if(routerInfo.meta && routerInfo.meta.icon){
+        return routerInfo.meta.icon
+      }
+      return 'home'
+    },
+    getTitle(routerInfo){
+      if(routerInfo.meta && routerInfo.meta.title){
+        return routerInfo.meta.title
+      }
+      return routerInfo.name
     }
-  }
-}
+  },
+};
 </script>
 <style src="./index.scss" lang="scss" scoped >
 </style>

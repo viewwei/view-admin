@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-link v-if="show" @click="operationClick(1)">
+    <el-link v-if="show" @click="operationClick(1)" class="text-hover">
       {{
         scope.readFunc
           ? scope.readFunc(row, scope, index, sourceData)
@@ -8,14 +8,14 @@
       }}
       <svg-icon icon-class="modify" class="svg-icon"></svg-icon>
     </el-link>
-    <div class="table-modify" v-else>
-      <el-input
+    <div  v-else>
+      <input
         size="mini"
         ref="input"
         v-model="input"
         placeholder="请输入内容"
         class="table-modify"
-      ></el-input>
+      />
       <svg-icon
         icon-class="ok"
         class="svg-icon table-operation"
@@ -81,11 +81,14 @@ export default {
 }
 </script>
 <style scoped>
-.table-modify >>> .el-input__inner {
+/* /* .table-modify >>> .el-input__inner {
   color: #000;
-}
-.table-modify >>> input {
+} */
+/* .table-modify >>> input {
   height: 15px;
+}  */
+ a:hover{
+  text-decoration: none;
 }
 </style>
 <style lang="scss" scoped>
@@ -99,7 +102,9 @@ export default {
   border: 1px solid #dcdfe6;
   border-radius: 5px;
   margin-right: 10px;
-  height: 25px;
+  height: 20px;
+  padding-left: 10px;
+  outline: none;
 }
 .table-operation {
   color: #000;

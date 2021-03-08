@@ -1,3 +1,4 @@
+import {resetRouter} from "@/router/index"
 const state = {
   // 判断是否登录标记
   roles: ['1']
@@ -13,8 +14,9 @@ const mutations = {
     localStorage.setItem('login', true)
   },
   LOGINOUT: function (state) {
-    debugger
     localStorage.removeItem('login')
+  
+    
   }
 }
 const actions = {
@@ -35,6 +37,11 @@ const actions = {
   },
   getRoles ({ state }) {
     return state.roles
+  },
+  loginout({commit,dispatch}){
+    commit("LOGINOUT")
+    dispatch('removeSystemRouter')
+    resetRouter()
   }
 }
 
